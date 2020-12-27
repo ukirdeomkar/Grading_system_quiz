@@ -1,0 +1,14 @@
+{
+    "window.zoomLevel": 0,
+    "window.openFilesInNewWindow": "off",
+    "files.autoSave": "afterDelay",
+    "editor.wrappingColumn": 0,
+    "window.restoreFullscreen": true,
+    "editor.renderIndentGuides": true,
+    "editor.mouseWheelZoom": true,
+ 
+    "php.validate.enable": true,
+    "php.validate.executablePath": "c:\\xampp\\php\\php.exe",
+    "php.validate.run": "onType",
+    "workbench.welcome.enabled": false
+}
