@@ -11,6 +11,26 @@ include('./Connect.php');
      {
      $qid=uniqid();
      $qns=$_POST['qns'.$i];
+     $msg = "";
+  
+        // If upload button is clicked ...
+        if (isset($_POST['upload'])) {
+        
+          $image = $_FILES["uploadimage"]["name"];
+          $tempname = $_FILES["uploadimage"]["tmp_name"];    
+              $folder = "image/".$image;
+                
+              mysqli_query($Connect, "INSERT INTO questions VALUES ('$image')");
+              if (move_uploaded_file($tempname, $folder))  {
+                  $msg = "Image uploaded successfully";
+              }else{
+                  $msg = "Failed to upload image";
+            }
+        }
+        $result = mysqli_query($Connect, "SELECT * FROM questions");
+
+
+
     $q3=mysqli_query($Connect,"INSERT INTO questions VALUES  ('$eid','$qid','$qns' , '$ch' , '$i')");
     $oaid=uniqid();
     $obid=uniqid();

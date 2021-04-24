@@ -1,6 +1,7 @@
 
 <?php
 include('./Connect.php');
+session_start();
 
  if(isset($_POST['submit']))
   {  
@@ -11,6 +12,9 @@ include('./Connect.php');
      $qwrong=$_POST['qwrong'];                                                                                          
      $qtime=$_POST['qtime'];
      $qdescription=$_POST['qdescription'];
+     $admin_id = $_SESSION['admin_id'];
+     $author = $_SESSION['aname'];
+
 
      $query1 = " SELECT * FROM `create_quiz_details` WHERE `qtitle` = '$qtitle' ";
      $res1 = mysqli_query($Connect,$query1);
@@ -24,11 +28,11 @@ include('./Connect.php');
      else
      {
   
-       $query1 = "INSERT INTO `create_quiz_details`(`eid`,`qtitle`, `qno`, `qright`, `qwrong`, `qtime`, `qdescription`) VALUES ('$eid','$qtitle','$qno','$qright','$qwrong','$qtime','$qdescription')";
+       $query1 = "INSERT INTO `create_quiz_details`(`eid`,`admin_id`,`qtitle`,  `author`, `qno`, `qright`, `qwrong`, `qtime`, `qdescription`) VALUES ('$eid','$admin_id','$qtitle',$author,'$qno','$qright','$qwrong','$qtime','$qdescription')";
        $res1 = mysqli_query($Connect,$query1);
-       
+    
        echo("<script>alert('Quiz Details Saved Succesfully ')</script>");
-       echo("<script>window.location = 'Create_quiz_que.php?eid=$eid&n=$qno'</script>");
+       echo("<script>window.location = 'Create_quiz_que.php?admin_id=$admin_id&eid=$eid&n=$qno'</script>");
        session_start();
        $_SESSION['qtitle']=$data['qtitle'];
        $_SESSION['qno'] = $_POST['qno'];

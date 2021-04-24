@@ -5,6 +5,7 @@
  
  if(isset($_POST['submit']))
   {
+     $admin_id = uniqid();
      $username= $_POST['username'];
      $name=$_POST['name'];
      $phone=$_POST['phonenumber'];
@@ -27,7 +28,7 @@
      }
      else
      {
-       $query1 = "INSERT INTO `admin`(`username`, `name`, `emailid`, `phonenumber`, `password`) VALUES ('$username','$name','$email','$phone','$password')";
+       $query1 = "INSERT INTO `admin`(`admin_id`,`username`, `name`, `emailid`, `phonenumber`, `password`) VALUES ('$admin_id','$username','$name','$email','$phone','$password')";
        $res1 = mysqli_query($Connect,$query1);
    
        echo("<script>alert('You have Sucessfully Registred!')</script>");

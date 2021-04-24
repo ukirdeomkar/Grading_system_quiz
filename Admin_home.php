@@ -37,7 +37,7 @@ session_start();
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div id="nav-home-tab">
       <div class="jumbotron">
-        <h4 class="display-4">Welcome, <?php echo($_SESSION['aname']); ?></h4>
+        <h4 class="display-4">Welcome, <?php echo($_SESSION['admin_id']); ?></h4>
         <h4 class="lead">Username-<?php echo($_SESSION['ausername']); ?></h4>
         <p class="lead">Contact-<?php echo($_SESSION['aphonenumber']); ?></p>
         <hr class="my-4">
@@ -55,11 +55,7 @@ session_start();
     <!--------------------My quiz ------------->
 
     <div class="tab-pane fade" id="nav-quiz" role="tabpanel" aria-labelledby="nav-quiz-tab">
-  <?php 
-    include('./Connect.php');
-    $query1 = " SELECT * FROM `create_quiz_details`";
-    $res1 = mysqli_query($Connect,$query1);
-  ?>
+  
     
     <div class="container">
 	<p id="success"></p>
@@ -88,7 +84,10 @@ session_start();
 				<tbody>
 				
 				<?php
-				$result = mysqli_query($Connect,"SELECT * FROM `create_quiz_details`");
+         include('./Connect.php');
+         $admin_id = $_SESSION['admin_id'];
+
+				$result = mysqli_query($Connect,"SELECT * FROM `create_quiz_details` WHERE `admin_id` = '$admin_id' ");
 					$i=1;
 					while($row = mysqli_fetch_array($result)) {
 				?>

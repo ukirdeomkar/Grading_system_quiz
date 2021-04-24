@@ -77,6 +77,7 @@ session_start();
 						
 						<th>SL NO</th>
                         <th>QUIZ TITLE</th>
+                        <th>Author</th>
                         <th></th>
                         <th>ACTION</th>
                     </tr>
@@ -84,6 +85,7 @@ session_start();
 				<tbody>
 				
 				<?php
+   
         $result = mysqli_query($Connect,"SELECT * FROM `create_quiz_details`");
 					$i=1;
 					while($row = mysqli_fetch_array($result)) {
@@ -92,6 +94,7 @@ session_start();
 
 					<td><?php echo $i; ?></td>
 					<td><?php echo $row["qtitle"]; ?></td>
+          <td><?php echo $row["author"];?></td>
           <td>             </td>
           
          <!-- echo("<script>window.location = 'Create_quiz_que.php?eid=$eid&n=$qno'</script>"); -->

@@ -13,6 +13,7 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    
      </head>
 </head>
 <body>
@@ -56,6 +57,21 @@ session_start();
                     <form method="POST" action="Create_quiz_que_back.php?n='.@$_GET['n'].'&eid='.@$_GET['eid'].'&ch=4 ">
                         <textarea class="form-control" placeholder="Enter the Question" name="qns'.$i.'" rows="4" cols="50" required></textarea>
                         <br>
+                        <label> Add an Image File </label>
+                        <br>
+                        <input type="file" 
+                        name="uploadimage" 
+                        value="" />
+              
+                        <div>
+                          <button 
+                               name="upload"> UPLOAD
+                             
+                           </button>
+                        </div>
+                        <br>';
+                        
+                        echo '
                         <input type="text" class="form-control" placeholder="Option 1" name="'.$i.'1" required>
                         <br>
                        <input type="text" class="form-control" placeholder="Option 2" name="'.$i.'2" required>
@@ -70,7 +86,8 @@ session_start();
                                <option>2</option>
                                <option>3</option>
                                 <option>4</option>
-                                </select>
+                        </select>
+                        
                         <br>
                         </div> 
                         ';

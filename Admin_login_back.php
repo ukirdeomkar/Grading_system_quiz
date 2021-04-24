@@ -3,7 +3,7 @@ session_start();
 include('./Connect.php');
 
 if(isset($_POST['submit']))
-{
+{ 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$query1 = " SELECT * FROM `admin` WHERE `username` = '$username' ";
@@ -18,7 +18,12 @@ if(isset($_POST['submit']))
             $_SESSION['aname']  =  $data['name'];
             $_SESSION['aphonenumber']=$data['phonenumber'];
             $_SESSION['aemailid']=$data['emailid'];
-            echo("<script>window.location = 'Admin_home.php'</script>");
+			$_SESSION['admin_id']=$data['admin_id'];
+			$admin_id = $_SESSION['admin_id'];
+			
+
+		
+            echo("<script>window.location = 'Admin_home.php?adminid=$admin_id'</script>");
 		}
 		else
 		{
