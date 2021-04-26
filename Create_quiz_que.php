@@ -54,21 +54,13 @@ session_start();
                      
                       <div class="card-header">  Question No :  '.$i.'   </div>
 
-                    <form method="POST" action="Create_quiz_que_back.php?n='.@$_GET['n'].'&eid='.@$_GET['eid'].'&ch=4 ">
+                    <form method="POST" enctype="multipart/form-data" action="Create_quiz_que_back.php?n='.@$_GET['n'].'&eid='.@$_GET['eid'].'&ch=4 ">
                         <textarea class="form-control" placeholder="Enter the Question" name="qns'.$i.'" rows="4" cols="50" required></textarea>
                         <br>
                         <label> Add an Image File </label>
+                        <br> 
+                        <input type="file" name="qimage" />
                         <br>
-                        <input type="file" 
-                        name="uploadimage" 
-                        value="" />
-              
-                        <div>
-                          <button 
-                               name="upload"> UPLOAD
-                             
-                           </button>
-                        </div>
                         <br>';
                         
                         echo '

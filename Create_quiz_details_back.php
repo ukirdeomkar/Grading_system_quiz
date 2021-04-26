@@ -23,7 +23,7 @@ session_start();
      if(strcmp($data['qtitle'],$qtitle)==0)
      {
        echo("<script>alert('Quiz is Already Created!')</script>");
-       echo("<script>window.location = 'Admin_home.php'</script>");
+       echo("<script>window.location = 'create_quiz_details.php'</script>");
      }
      else
      {
