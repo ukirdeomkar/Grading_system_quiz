@@ -1,8 +1,15 @@
-<html>
+
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <meta name="viewport" content="width=device-width , initial-scale=1 ">
+
+<style>
+img {
+  width: 100%;
+  height: auto;
+}
+</style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
@@ -19,13 +26,13 @@
         </div>
     </nav>
     <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+  <!-- <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-link disabled" href="#"><h4 style="color:#2487e3">Dashboard</h4></a>
     <a class="nav-item nav-link " id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
     <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">My Quiz</a>
     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Ranking</a>
     <a class="nav-item nav-link" id="nav-edit-tab" data-toggle="tab" href="#nav-edit" role="tab" aria-controls="nav-edit" aria-selected="false">Edit Profile</a>
-  </div>
+  </div> -->
 </nav>
 </body>
         <!--quiz start-->
@@ -44,8 +51,15 @@ echo '<div class="panel" style="margin:5%">';
 while($row=mysqli_fetch_array($q) )
 {
 $qns=$row['questions'];
-$qid=$row['qid'];   
-echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
+$qid=$row['qid']; 
+$img=$row['qimage'];  
+echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />
+
+<div class="alb">
+<img src="qimage/'.$img.'" alt="error-image" >
+</div>
+';
+
 }
 $q=mysqli_query($Connect,"SELECT * FROM options WHERE qid='$qid' " );
 echo '<form action="Start_quiz_back.php?user='.$user.'&eid='.$eid.'&n='.$sn.'&t='.$qno.'&qid='.$qid.'" method="POST"  class="form-horizontal">

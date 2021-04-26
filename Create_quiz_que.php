@@ -59,7 +59,7 @@ session_start();
                         <br>
                         <label> Add an Image File </label>
                         <br> 
-                        <input type="file" name="qimage" />
+                        <input type="file" name="qimage'.$i.'" />
                         <br>
                         <br>';
                         

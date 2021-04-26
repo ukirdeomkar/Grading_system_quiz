@@ -16,12 +16,12 @@ include('./Connect.php');
   
         // If upload button is clicked ...
        
-        
-    $img = $_FILES["qimage"]["name"];
-    $tempname = $_FILES["uploadimage"]["tmp_name"];    
+    $a = 'qimage'.$i.'';
+    $image = $_FILES[$a]["name"];
+    $tempname = $_FILES[$a]["tmp_name"];    
         $folder = "qimage/".$image;
           
-        //mysqli_query($Connect, "INSERT INTO questions VALUES ('$image')");
+        // mysqli_query($Connect, "INSERT INTO questions VALUES ('$image')");
         if (move_uploaded_file($tempname, $folder))  {
             $msg = "Image uploaded successfully";
             echo 'Image uploaded successfully';
