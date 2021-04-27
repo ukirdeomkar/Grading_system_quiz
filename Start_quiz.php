@@ -15,8 +15,43 @@ img {
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    
+    <script type="text/javascript">
+	function timeout()
+	{
+		var hours=Math.floor(timeLeft/3600);
+		var minute=Math.floor((timeLeft-(hours*60*60)-30)/60);
+		var second=timeLeft%60;
+		var hrs=checktime(hours);
+		var mint=checktime(minute);
+		var sec=checktime(second);
+		if(timeLeft<=0)
+		{
+			clearTimeout(tm);
+			document.getElementById("endtest").submit();
+		}
+		else
+		{
+
+			document.getElementById("time").innerHTML=hrs+":"+mint+":"+sec;
+		}
+		timeLeft--;
+		var tm= setTimeout(function(){timeout()},1000);
+	}
+	function checktime(msg)
+	{
+		if(msg<10)
+		{
+			msg="0"+msg;
+		}
+		return msg;
+	}
+	</script>
+
+      
 </head>
-<body>
+
+<body onload="timeout()" >
     <nav class="navbar navbar-dark bg-dark ">
       <!--  <img src="https://cdn11.bigcommerce.com/s-fkkokiv406/images/stencil/800x600/uploaded_images/quizzo.jpg?t=1525706940" style="margin-left:10px" width="200" height="80" class="d-inline-block align-top" alt="">
 -->     <h1> <a href="Index.php" style="margin-left:30px ">QUIZZO</a></h1>
@@ -34,7 +69,18 @@ img {
     <a class="nav-item nav-link" id="nav-edit-tab" data-toggle="tab" href="#nav-edit" role="tab" aria-controls="nav-edit" aria-selected="false">Edit Profile</a>
   </div> -->
 </nav>
-</body>
+<?php
+include('./Connect.php');
+$eid=@$_GET['eid'];
+$time = mysqli_query($Connect, "SELECT `qtime` FROM questions WHERE eid='$eid'"); 
+?>
+  <h2>
+		  <script typ e="text/javascript">
+		  var timeLeft= 2 *60;
+		  
+		  </script>
+		  
+		  <div id="time" style="float:center">timeout</div></h2>
         <!--quiz start-->
 <?php
 
@@ -75,15 +121,19 @@ echo'<br /><button name="submit" type="submit" class="btn btn-primary"><span cla
 // header("location:Start_quiz_back.php?q=reate_quiz_details&step=2&eid=$eid&n=$total");
 }
 
-//quiz end
+
+// quiz end
 if($_GET['user']=='admin' )
  {
-     echo '<a href="Admin_home.php" class="btn btn-danger btn-block ">End Test</button>';
+     echo '<a type="submit" id="endtest" href="Admin_home.php" class="btn btn-danger btn-block ">End Test</button>';
  }
 else if($_GET['user']=='student')
 {
-    echo '<a href="Student_home.php" class="btn btn-danger btn-block ">End Test</button>';
+    echo '<a type="submit" id="endtest" href="Student_home.php" class="btn btn-danger btn-block ">End Test</button>';
 }
 ?>
+<form method="post" id="endtest" action="Result.php">
+<!-- <button type="submit" id="endtest" class="btn btn-danger btn-block ">End Test</button> -->
+</form>
 </body>
 </html>
