@@ -74,8 +74,7 @@ $s=$s-$qwrong;
 $q=mysqli_query($Connect,"UPDATE `history` SET `score`=$s,`level`=$sn,`qwrong`=$w, date=NOW() WHERE  email = '$emailid' AND eid = '$eid'")or die('Error147');
 }
 
-
-if($sn!= $qno) 
+if($sn!= $qno || $timeLeft>0 ) 
 {   
 $sn++;
 echo $sn;
@@ -84,7 +83,7 @@ header("location:Start_quiz.php?q=create_quiz_details&user=$user&step=2&eid=$eid
 
 
 //Edit line 87 else if statement to not include admin in the ranking system
-else if( $_GET['user']=='student' )
+else if( $_GET['user']=='student'  )
 {    
 
 $q=mysqli_query($Connect,"SELECT score FROM history WHERE eid='$eid' AND email='$emailid'" )or die('Error156');
