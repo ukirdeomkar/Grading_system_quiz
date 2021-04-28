@@ -20,7 +20,7 @@ img {
 	function timeout()
 	{
 		var hours=Math.floor(timeLeft/3600);
-		var minute=Math.floor((timeLeft-(hours*60*60)-30)/60);
+		var minute=Math.floor((timeLeft-(hours*60*60))/60);
 		var second=timeLeft%60;
 		var hrs=checktime(hours);
 		var mint=checktime(minute);
@@ -72,15 +72,18 @@ img {
 <?php
 include('./Connect.php');
 $eid=@$_GET['eid'];
-$time = mysqli_query($Connect, "SELECT `qtime` FROM questions WHERE eid='$eid'"); 
+$res1 = mysqli_query($Connect, "SELECT `qtime` FROM create_quiz_details WHERE eid='$eid'"); 
+$data =   mysqli_fetch_array($res1);
+$qtime =  $data['qtime'];
+echo '<h2>
+
+  <script typ e="text/javascript">
+  var timeLeft= '.$qtime.' *60  ;
+  
+  </script>
+  
+  <div id="time" style="float:center">timeout</div></h2> ';
 ?>
-  <h2>
-		  <script typ e="text/javascript">
-		  var timeLeft= 2 *60;
-		  
-		  </script>
-		  
-		  <div id="time" style="float:center">timeout</div></h2>
         <!--quiz start-->
 <?php
 
@@ -108,7 +111,7 @@ echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />
 
 }
 $q=mysqli_query($Connect,"SELECT * FROM options WHERE qid='$qid' " );
-echo '<form action="Start_quiz_back.php?user='.$user.'&eid='.$eid.'&n='.$sn.'&t='.$qno.'&qid='.$qid.'" method="POST"  class="form-horizontal">
+echo '<form action="Start_quiz_back.php?user='.$user.'&eid='.$eid.'&n='.$sn.'&t='.$qno.'&qid='.$qid. '" method="POST"  class="form-horizontal">
 <br />';
 
 while($row=mysqli_fetch_array($q) )
