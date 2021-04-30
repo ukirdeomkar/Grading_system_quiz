@@ -1,12 +1,21 @@
 <?php
 session_start();
-
+include('./Connect.php');
 ?>
 
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width , initial-scale=1 ">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+
+
+
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
@@ -92,7 +101,7 @@ session_start();
 				?>
 				<tr eid="<?php echo $row["eid"]; ?>"> 
 
-					<td><b><h3><?php echo $i; ?></h3></b></td>
+					<td><b><h3><?php echo $i; ?>.</h3></b></td>
 					<td>
           <h3><b><i>
           <?php echo $row["qtitle"]; ?> </i></b></h3>
@@ -208,10 +217,83 @@ session_start();
 
 
   <div class="tab-pane fade" id="nav-rank" role="tabpanel" aria-labelledby="nav-rank-tab">
+
   
+  <div class="container">
+	<p id="success"></p> 
+        <div class="table-wrapper">
+            <div class="table-title">
+               
+                   
+                    <h2 class="card-title" style="text-align:center"> <b> <div class="card-head"> Quizzes</div></b></h2>
+				
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+						
+						<th>SL NO</th>
+                        <th>QUIZ TITLE</th>
+                        <th>Author</th>
+                        <th></th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+				<tbody>
+				
+				<?php
+   
+        $result = mysqli_query($Connect,"SELECT * FROM `create_quiz_details`");
+					$i=1;
+					while($row = mysqli_fetch_array($result)) {
+				?>
+				<tr eid="<?php echo $row["eid"]; ?>"> 
+
+					<td><b><h3><?php echo $i; ?>.</h3></b></td>
+					<td>
+          <h3><b><i>
+          <?php echo $row["qtitle"]; ?> </i></b></h3>
+          <br>
+          <b>Description : </b><?php echo $row['qdescription'] ?>
+          </td>
+          <td><?php echo $row["author"];?></td>
+          <td>             </td>
+          
+         <!-- echo("<script>window.location = 'Create_quiz_que.php?eid=$eid&n=$qno'</script>"); -->
+        <?php  
+                $eid=$row['eid'];
+                $email=$_SESSION['emailid'];
+        
+                $q12=mysqli_query($Connect,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
+                $rowcount=mysqli_num_rows($q12);	
+                
+                  echo ' <td>
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#.bd-example-modal-lg">
+                  View Rank
+                </button>&nbsp;&nbsp; </td>
+                  ';
+                
+         ?>
+                    </td>
+				</tr>
+				<?php
+				$i++;
+				}
+				?>
+				</tbody>
+			</table>
+			
+        </div>
+      </div>
   
+
+
+
+
+<!-- Ranking Old vala  -->
+
   <?php 
-    include('./Connect.php');
+    
     $q=mysqli_query($Connect,"SELECT * FROM ranking  ORDER BY score DESC " )or die('Error223');
   ?>
     
