@@ -263,24 +263,21 @@ include('./Connect.php');
         
                 $q12=mysqli_query($Connect,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
                 $rowcount=mysqli_num_rows($q12);	
-                ?> <td>
+                ?>
+                 <td>
                                   
               <!-- <td> <a href="View_rank.php?&user=student&eid='.$row['eid'].'" class="btn btn-danger" >View Rank</a> &nbsp;&nbsp; -->
 
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#viewrank<?php echo $row["eid"]?>">
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#viewrank<?php echo $eid ?>">
                       <?php echo $eid; ?>
                     </button>
-                   
- 
                 
                 </td>   
                 <td> 
-              
                 <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#viewrank">Message</button> -->
-
                 </td>
         
-                    </td>
+           </td>
                   
                     
 				</tr>
@@ -435,10 +432,16 @@ include('./Connect.php');
 
 <!-- Button trigger modal -->
 
-
+	
+<?php
+   
+   $result = mysqli_query($Connect,"SELECT * FROM `create_quiz_details`");
+     while($row = mysqli_fetch_array($result)) {
+       echo $row['eid']; 
+   ?>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="viewrank<?php echo $row['eid'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -447,7 +450,71 @@ include('./Connect.php');
         </button>
       </div>
       <div class="modal-body">
-        ...
+      <div class="container">
+	<p id="success"></p>
+        <div class="table-wrapper">
+						              <h2 class="card-title" style="text-align:center"> <b> <div class="card-head"> Ranking</div></b></h2>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+						
+						<th>SL NO</th>
+                        <th>Name</th>
+                        <th>Email Id</th>
+                        <th>Quiz Title</th>
+                        <th>Score</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+				<tbody>
+        
+				
+       <?php 
+       
+       $eid = $row['eid'];
+       
+       $q=mysqli_query($Connect,"SELECT * FROM ranking  WHERE `eid` = '$eid'  ORDER BY score DESC  " )or die('Error223');
+       $c=1;
+            while($row=mysqli_fetch_array($q) )
+            {
+            $e=$row['email'];
+            $s=$row['score'];
+            $eid=$row['eid'];
+            $q12=mysqli_query($Connect,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
+            while($row=mysqli_fetch_array($q12) )
+            {
+            $name=$row['name'];
+            $username=$row['username'];
+
+              $result=mysqli_query($Connect,"SELECT * FROM create_quiz_details WHERE eid='$eid' " )or die('Error231');
+              while($row=mysqli_fetch_array($result) )
+              {
+                $qtitle=$row['qtitle'];
+              }
+            
+            }
+            ?>
+			
+					<td><?php echo $c; ?></td>
+          <td><?php echo $name?></td>
+          <td><?php echo $e ?></td>
+          <td><?php echo $qtitle  ?></td>
+          <td><?php echo $s ?></td>
+          <td>             </td>
+          <td> 
+             &nbsp;&nbsp;
+          </td>
+				</tr>
+				<?php
+				$c++;
+				}
+				?>
+				</tbody>
+			</table>
+			
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -458,6 +525,8 @@ include('./Connect.php');
 </div>
 
 
+
+<?php }  ?>
 
 
 </body>
