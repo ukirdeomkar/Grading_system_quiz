@@ -268,8 +268,8 @@ include('./Connect.php');
                 $rowcount=mysqli_num_rows($q12);	
                 
                   echo ' <td>
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#.bd-example-modal-lg">
-                  View Rank
+                  <td> <a href="View_rank.php?&user=student&step=2&eid='.$row['eid'].'&n=1&t='.$row["qno"].'" class="btn btn-danger" >View Rank</a> &nbsp;&nbsp;
+                
                 </button>&nbsp;&nbsp; </td>
                   ';
                 
