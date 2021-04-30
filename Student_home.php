@@ -92,8 +92,13 @@ session_start();
 				?>
 				<tr eid="<?php echo $row["eid"]; ?>"> 
 
-					<td><?php echo $i; ?></td>
-					<td><?php echo $row["qtitle"]; ?></td>
+					<td><b><h3><?php echo $i; ?></h3></b></td>
+					<td>
+          <h3><b><i>
+          <?php echo $row["qtitle"]; ?> </i></b></h3>
+          <br>
+          <b>Description : </b><?php echo $row['qdescription'] ?>
+          </td>
           <td><?php echo $row["author"];?></td>
           <td>             </td>
           
@@ -238,21 +243,19 @@ session_start();
             {
             $e=$row['email'];
             $s=$row['score'];
+            $eid=$row['eid'];
             $q12=mysqli_query($Connect,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
             while($row=mysqli_fetch_array($q12) )
             {
             $name=$row['name'];
             $username=$row['username'];
-            $q11=mysqli_query($Connect,"SELECT * FROM history WHERE email='$e' " )or die('Error231');
-            while($row=mysqli_fetch_array($q11) )
-            {  
-              $eid= $row['eid'];
+
               $result=mysqli_query($Connect,"SELECT * FROM create_quiz_details WHERE eid='$eid' " )or die('Error231');
               while($row=mysqli_fetch_array($result) )
               {
                 $qtitle=$row['qtitle'];
               }
-            }
+            
             }
             ?>
 			

@@ -11,6 +11,7 @@ $qno=@$_GET['t'];
 $ans=$_POST['ans'];
 $qid=@$_GET['qid'];
 $emailid=$_SESSION['emailid'];
+$username = $_SESSION['username'];
 
 $res1 = mysqli_query($Connect," SELECT * FROM `user` WHERE `username` = '$username' ");
 while($row=mysqli_fetch_array($res1) )
@@ -74,7 +75,7 @@ $s=$s-$qwrong;
 $q=mysqli_query($Connect,"UPDATE `history` SET `score`=$s,`level`=$sn,`qwrong`=$w, date=NOW() WHERE  email = '$emailid' AND eid = '$eid'")or die('Error147');
 }
 
-if($sn!= $qno || $timeLeft>0 ) 
+if($sn!= $qno  ) 
 {   
 $sn++;
 echo $sn;
@@ -91,11 +92,11 @@ while($row=mysqli_fetch_array($q) )
 {
 $s=$row['score'];
 }
-$q=mysqli_query($Connect,"SELECT * FROM ranking WHERE email='$emailid'" )or die('Error161');
+$q=mysqli_query($Connect,"SELECT * FROM ranking WHERE eid='$eid' AND email='$emailid'" )or die('Error161');
 $rowcount=mysqli_num_rows($q);
 if($rowcount == 0)
 {
-$q=mysqli_query($Connect,"INSERT INTO ranking VALUES('$emailid','$s',NOW())")or die('Error165');
+$q=mysqli_query($Connect,"INSERT INTO ranking VALUES('$emailid','$eid','$s',NOW())")or die('Error165');
 }
 
 else
