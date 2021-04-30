@@ -38,8 +38,6 @@ img {
 
 			document.getElementById("time").innerHTML=hrs+":"+mint+":"+sec;
 		}
-		 
-		document.getElementById("updateTime").innerHTML = timeLeft;
 		timeLeft--;
 		var tm= setTimeout(function(){timeout()},1000);
 	}
