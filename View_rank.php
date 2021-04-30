@@ -1,10 +1,19 @@
 
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width , initial-scale=1 ">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+</head>
 
+<body>
 <?php 
 include('./Connect.php');
 session_start();
-    
-    $q=mysqli_query($Connect,"SELECT * FROM ranking  ORDER BY score DESC " )or die('Error223');
   ?>
     
     <div class="container">
@@ -29,7 +38,10 @@ session_start();
         
 				
        <?php 
-       $q=mysqli_query($Connect,"SELECT * FROM ranking  ORDER BY score DESC " )or die('Error223');
+       
+       $eid = $_GET['eid'];
+       
+       $q=mysqli_query($Connect,"SELECT * FROM ranking  WHERE `eid` = '$eid'  ORDER BY score DESC  " )or die('Error223');
        $c=1;
             while($row=mysqli_fetch_array($q) )
             {
@@ -69,3 +81,5 @@ session_start();
 			</table>
 			
         </div>
+
+</body>

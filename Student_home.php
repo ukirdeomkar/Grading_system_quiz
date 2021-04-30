@@ -11,11 +11,6 @@ include('./Connect.php');
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
-
-
-
-
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
@@ -236,6 +231,7 @@ include('./Connect.php');
                         <th>QUIZ TITLE</th>
                         <th>Author</th>
                         <th></th>
+                        <th> </th >
                         <th>ACTION</th>
                     </tr>
                 </thead>
@@ -262,20 +258,36 @@ include('./Connect.php');
          <!-- echo("<script>window.location = 'Create_quiz_que.php?eid=$eid&n=$qno'</script>"); -->
         <?php  
                 $eid=$row['eid'];
+                
                 $email=$_SESSION['emailid'];
         
                 $q12=mysqli_query($Connect,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
                 $rowcount=mysqli_num_rows($q12);	
+                ?> <td>
+                                  
+              <!-- <td> <a href="View_rank.php?&user=student&eid='.$row['eid'].'" class="btn btn-danger" >View Rank</a> &nbsp;&nbsp; -->
+
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#viewrank<?php echo $row["eid"]?>">
+                      <?php echo $eid; ?>
+                    </button>
+                   
+ 
                 
-                  echo ' <td>
-                  <td> <a href="View_rank.php?&user=student&step=2&eid='.$row['eid'].'&n=1&t='.$row["qno"].'" class="btn btn-danger" >View Rank</a> &nbsp;&nbsp;
-                
-                </button>&nbsp;&nbsp; </td>
-                  ';
-                
-         ?>
+                </td>   
+                <td> 
+              
+                <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#viewrank">Message</button> -->
+
+                </td>
+        
                     </td>
+                  
+                    
 				</tr>
+        
+
+
+        
 				<?php
 				$i++;
 				}
@@ -286,9 +298,8 @@ include('./Connect.php');
         </div>
       </div>
   
-
-
-
+  <!------------------POP UP ----------------->
+  
 
 <!-- Ranking Old vala  -->
 
@@ -422,7 +433,31 @@ include('./Connect.php');
 </div>
 
 
-    
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 </body>
