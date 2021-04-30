@@ -49,6 +49,9 @@ img {
 		}
 		return msg;
 	}
+	function removeElement(element) {
+     element.remove();
+	}
 	</script>
 
       
@@ -126,7 +129,7 @@ $img=$row['qimage'];
 echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />
 
 <div class="alb">
-<img src="qimage/'.$img.'" alt="error-image" >
+<img src="qimage/'.$img.'" onerror="removeElement(this);" >
 </div>
 ';
 
@@ -156,7 +159,7 @@ echo'<br /><button name="submit" type="submit" class="btn btn-primary"><span cla
 //     echo '<a type="submit" id="endtest" href="Student_home.php" class="btn btn-danger btn-block ">End Test</button>';
 // }
 ?>
-<form method="post" id="endtest" action="Start_quiz_back.php?user='.$user.'&eid='.$eid.'&n='.$sn.'&t='.$qno.'&qid='.$qid.'">
+<form method="post" id="endtest" name="endtest" action="Start_quiz_back.php?user='.$user.'&eid='.$eid.'&n='.$sn.'&t='.$qno.'&qid='.$qid.'">
 <!-- <button type="submit" id="endtest" class="btn btn-danger btn-block ">End Test</button> -->
 </form>
 </body>
