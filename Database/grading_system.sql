@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 28, 2021 at 04:44 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Host: localhost
+-- Generation Time: Apr 30, 2021 at 09:43 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -233,7 +233,17 @@ INSERT INTO `history` (`email`, `eid`, `score`, `level`, `qright`, `qwrong`, `da
 ('', '6086c0f393ed5', -2, 1, 0, 1, '2021-04-28 13:35:28'),
 ('ganeshveer@gmail.com', '6086c0f393ed5', -4, 2, 0, 2, '2021-04-27 17:22:49'),
 ('ganeshveer@gmail.com', '6086c0f393ed5', -4, 2, 0, 2, '2021-04-27 17:22:49'),
-('', '6086c0f393ed5', -2, 1, 0, 1, '2021-04-28 13:35:28');
+('', '6086c0f393ed5', -2, 1, 0, 1, '2021-04-28 13:35:28'),
+('a@a.com', '6086c0f393ed5', 0, 2, 1, 1, '2021-04-29 01:47:34'),
+('a@a.com', '6086bfda81f82', 2, 1, 1, 0, '2021-04-30 06:14:13'),
+('a@a.com', '6086af028347c', -4, 2, 0, 2, '2021-04-30 06:18:49'),
+('a@a.com', '5fdb0aed2542e', -1, 1, 0, 1, '2021-04-30 06:24:23'),
+('a@a.com', '6086b4e806e35', -4, 2, 0, 2, '2021-04-30 06:24:41'),
+('a@a.com', '5fdc3b8c94001', -2, 3, 1, 6, '2021-04-30 07:03:16'),
+('a@a.com', '5fdc3b8c94001', -2, 3, 1, 6, '2021-04-30 07:03:16'),
+('a@a.com', '602210a8d68df', 20, 10, 10, 0, '2021-04-30 07:03:58'),
+('a@a.com', '602210cadb664', 4, 2, 2, 0, '2021-04-30 07:07:53'),
+('a@a.com', '602d3b75e9a8c', 12, 1, 1, 0, '2021-04-30 07:29:59');
 
 -- --------------------------------------------------------
 
@@ -547,6 +557,7 @@ INSERT INTO `questions` (`eid`, `qid`, `questions`, `qimage`, `ch`, `sn`) VALUES
 
 CREATE TABLE `ranking` (
   `email` varchar(50) NOT NULL,
+  `eid` text NOT NULL,
   `score` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
@@ -555,15 +566,201 @@ CREATE TABLE `ranking` (
 -- Dumping data for table `ranking`
 --
 
-INSERT INTO `ranking` (`email`, `score`, `time`) VALUES
-('tejasveer41@gmail.com', 15, '2020-12-17 07:54:45'),
-('mehulsonawane@gmail.com', 20, '2020-12-17 07:58:56'),
-('pranaysuryarao@gmail.com', 10, '2020-12-17 07:59:49'),
-('kovidnarkar@gmail.com', 0, '2020-12-17 08:00:44'),
-('aniket987@gmail.com', 10, '2020-12-17 18:18:18'),
-('omkarukirde2002@gmail.com', 10, '2020-12-18 05:22:15'),
-('ganeshveer@gmail.com', 7, '2021-04-27 17:22:49'),
-('muku@muku.com', 17, '2021-03-12 16:42:49');
+INSERT INTO `ranking` (`email`, `eid`, `score`, `time`) VALUES
+('tejasveer41@gmail.com', '', 15, '2020-12-17 07:54:45'),
+('mehulsonawane@gmail.com', '', 20, '2020-12-17 07:58:56'),
+('pranaysuryarao@gmail.com', '', 10, '2020-12-17 07:59:49'),
+('kovidnarkar@gmail.com', '', 0, '2020-12-17 08:00:44'),
+('aniket987@gmail.com', '', 10, '2020-12-17 18:18:18'),
+('omkarukirde2002@gmail.com', '', 10, '2020-12-18 05:22:15'),
+('ganeshveer@gmail.com', '', 7, '2021-04-27 17:22:49'),
+('muku@muku.com', '', 17, '2021-03-12 16:42:49'),
+('a@a.com', '', -8, '2021-04-30 06:24:41'),
+('a@a.com', '5fdc3b8c94001', -2, '2021-04-30 07:03:16'),
+('a@a.com', '602210a8d68df', 20, '2021-04-30 07:03:58'),
+('a@a.com', '602210cadb664', 4, '2021-04-30 07:07:53'),
+('a@a.com', '602d3b75e9a8c', 12, '2021-04-30 07:29:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `time`
+--
+
+CREATE TABLE `time` (
+  `username` varchar(50) NOT NULL,
+  `eid` text NOT NULL,
+  `timeleft` bigint(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `time`
+--
+
+INSERT INTO `time` (`username`, `eid`, `timeleft`) VALUES
+('aa', '6086c0f393ed5', 120),
+('aa', '6086c0f393ed5', 120),
+('aa', '6086bfda81f82', 60),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '6086bfda81f82', 60),
+('aa', '6086bfda81f82', 60),
+('aa', '6086bfda81f82', 60),
+('aa', '6086af028347c', 120),
+('aa', '6086af028347c', 120),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '5fdb0aed2542e', 600),
+('aa', '6086b4e806e35', 120),
+('aa', '6086b4e806e35', 120),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '5fdc3b8c94001', 600),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210a8d68df', 1800),
+('aa', '602210cadb664', 1800),
+('aa', '602210cadb664', 1800),
+('aa', '602d3b75e9a8c', 300);
 
 -- --------------------------------------------------------
 
@@ -594,7 +791,8 @@ INSERT INTO `user` (`username`, `name`, `email`, `phonenumber`, `password`) VALU
 ('muku', 'muku', 'muku@muku.com', 123, 'muku'),
 ('ross', 'Rohan Chaudhari', 'rohanchaudhari990@gmail.com', 9321216460, 'Rohan'),
 ('CodeCellWasHere', 'Code Cell', 'xyz@xyz.com', 1000000000, 'EasyPassword101'),
-('qq', 'qq', 'qq@q.com', 0, 'qq');
+('qq', 'qq', 'qq@q.com', 0, 'qq'),
+('aa', 'aa', 'a@a.com', 1111, 'aa');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
