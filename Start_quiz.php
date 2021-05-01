@@ -35,10 +35,11 @@ img {
 		}
 		else
 		{
-
+			
 			document.getElementById("time").innerHTML=hrs+":"+mint+":"+sec;
 		}
 		timeLeft--;
+		
 		var tm= setTimeout(function(){timeout()},1000);
 	}
 	function checktime(msg)
@@ -53,7 +54,18 @@ img {
      element.remove();
 	}
 	</script>
-
+	<?php 
+		function upddateTime()
+		{
+			session_start();
+			include('./Connect.php');
+			$username= $_SESSION['username'];
+			$eid=$_GET['eid'];
+			//$timeLeft = "<script>document.write(timeout)</script>";
+			echo $timeLeft;
+			mysqli_query($Connect,"UPDATE `time` SET `timeleft`='$timeLeft' WHERE `username` = $username && `eid`=$eid");	
+		}
+ 	?>
       
 </head>
 
@@ -76,18 +88,9 @@ img {
     <a class="nav-item nav-link" id="nav-edit-tab" data-toggle="tab" href="#nav-edit" role="tab" aria-controls="nav-edit" aria-selected="false">Edit Profile</a>
   </div> -->
 </nav>
-<div id="updateTime"> 
-<?php 
-$username= $_SESSION['username'];
-echo $username;
 
-$eid=$_GET['eid'];
-echo $eid;
-$timeLeft = "<script>document.write(timeout)</script>";
-echo $timeLeft;
-mysqli_query($Connect,"UPDATE `time` SET `timeleft`='$timeLeft' WHERE `username` = $username && `eid`=$eid"); ?>
 
-</div>
+
 
 <?php
 

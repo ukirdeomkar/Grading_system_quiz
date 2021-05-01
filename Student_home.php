@@ -220,7 +220,7 @@ include('./Connect.php');
             <div class="table-title">
                
                    
-                    <h2 class="card-title" style="text-align:center"> <b> <div class="card-head"> Quizzes</div></b></h2>
+                    <h2 class="card-title" style="text-align:center"> <b> <div class="card-head"> Ranking</div></b></h2>
 				
             </div>
             <table class="table table-striped table-hover">
@@ -245,12 +245,11 @@ include('./Connect.php');
 				?>
 				<tr eid="<?php echo $row["eid"]; ?>"> 
 
-					<td><b><h3><?php echo $i; ?>.</h3></b></td>
+					<td><?php echo $i; ?></td>
 					<td>
-          <h3><b><i>
-          <?php echo $row["qtitle"]; ?> </i></b></h3>
-          <br>
-          <b>Description : </b><?php echo $row['qdescription'] ?>
+          <?php echo $row["qtitle"]; ?>
+          <!-- <br> -->
+          <!-- <b>Description : </b><?php echo $row['qdescription'] ?> -->
           </td>
           <td><?php echo $row["author"];?></td>
           <td>             </td>
@@ -264,25 +263,18 @@ include('./Connect.php');
                 $q12=mysqli_query($Connect,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
                 $rowcount=mysqli_num_rows($q12);	
                 ?>
-                 <td>
-                                  
-              <!-- <td> <a href="View_rank.php?&user=student&eid='.$row['eid'].'" class="btn btn-danger" >View Rank</a> &nbsp;&nbsp; -->
-
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#viewrank<?php echo $eid ?>">
-                      <?php echo $eid; ?>
-                    </button>
-                
+                 <td>               
                 </td>   
-                <td> 
-                <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#viewrank">Message</button> -->
+                <td>
+                   <!-- <td> <a href="View_rank.php?&user=student&eid='.$row['eid'].'" class="btn btn-danger" >View Rank</a> &nbsp;&nbsp; -->
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#viewrank<?php echo $eid ?>">
+                      View Rank
+                 </button>
                 </td>
         
-           </td>
-                  
+           </td>      
                     
 				</tr>
-        
-
 
         
 				<?php
@@ -295,13 +287,112 @@ include('./Connect.php');
         </div>
       </div>
   
-  <!------------------POP UP ----------------->
-  
+  <!-----------------------------------rank POP UP -------------------------------------------------->
+  <?php 
+
+ $result = mysqli_query($Connect,"SELECT * FROM `create_quiz_details`");
+ $array = array();
+while($row = mysqli_fetch_array($result)){
+  array_push($array,$row['eid']);
+}
+// Set the increment variable
+foreach( $array as $eid ):  
+
+?>
+
+<!-- Modal -->
+<div class="modal fade" id="viewrank<?php echo $eid?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="container">
+	<p id="success"></p>
+        <div class="table-wrapper">
+						              <h2 class="card-title" style="text-align:center"> <b> <div class="card-head"> Ranking</div></b></h2>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+						
+						<th>SL NO</th>
+                        <th>Name</th>
+                        <th>Email Id</th>
+                        <th>Quiz Title</th>
+                        <th>Score</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+				<tbody>
+        
+				
+       <?php 
+       
+       $q=mysqli_query($Connect,"SELECT * FROM ranking  WHERE `eid` = '$eid'  ORDER BY score DESC  " )or die('Error223');
+       $c=1;
+            while($row=mysqli_fetch_array($q) )
+            {
+            $e=$row['email'];
+            $s=$row['score'];
+            $eid=$row['eid'];
+            $q12=mysqli_query($Connect,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
+            while($row=mysqli_fetch_array($q12) )
+            {
+            $name=$row['name'];
+            $username=$row['username'];
+
+              $result=mysqli_query($Connect,"SELECT * FROM create_quiz_details WHERE eid='$eid' " )or die('Error231');
+              while($row=mysqli_fetch_array($result) )
+              {
+                $qtitle=$row['qtitle'];
+              }
+            
+            }
+            ?>
+			
+					<td><?php echo $c; ?></td>
+          <td><?php echo $name?></td>
+          <td><?php echo $e ?></td>
+          <td><?php echo $qtitle  ?></td>
+          <td><?php echo $s ?></td>
+          <td>             </td>
+          <td> 
+             &nbsp;&nbsp;
+          </td>
+				</tr>
+				<?php
+				$c++;
+				}
+				?>
+				</tbody>
+			</table>
+			
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php  
+
+endforeach; //End the loop ?>
+<!---------------------------------------rank pop up end ------------------------------------>
+
 
 <!-- Ranking Old vala  -->
 
   <?php 
-    
+    /*
     $q=mysqli_query($Connect,"SELECT * FROM ranking  ORDER BY score DESC " )or die('Error223');
   ?>
     
@@ -371,7 +462,7 @@ include('./Connect.php');
 
 
   </div>
-
+*/ ?>
 
 
   <!--------------------Edit profile--------------->
@@ -428,106 +519,6 @@ include('./Connect.php');
 </div>
 </div>
 </div>
-
-
-<!-- Button trigger modal -->
-
-	
-<?php
-   
-   $result = mysqli_query($Connect,"SELECT * FROM `create_quiz_details`");
-     while($row = mysqli_fetch_array($result)) {
-       echo $row['eid']; 
-   ?>
-<!-- Modal -->
-<div class="modal fade" id="viewrank<?php echo $row['eid'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="container">
-	<p id="success"></p>
-        <div class="table-wrapper">
-						              <h2 class="card-title" style="text-align:center"> <b> <div class="card-head"> Ranking</div></b></h2>
-            </div>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-						
-						<th>SL NO</th>
-                        <th>Name</th>
-                        <th>Email Id</th>
-                        <th>Quiz Title</th>
-                        <th>Score</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-				<tbody>
-        
-				
-       <?php 
-       
-       $eid = $row['eid'];
-       
-       $q=mysqli_query($Connect,"SELECT * FROM ranking  WHERE `eid` = '$eid'  ORDER BY score DESC  " )or die('Error223');
-       $c=1;
-            while($row=mysqli_fetch_array($q) )
-            {
-            $e=$row['email'];
-            $s=$row['score'];
-            $eid=$row['eid'];
-            $q12=mysqli_query($Connect,"SELECT * FROM user WHERE email='$e' " )or die('Error231');
-            while($row=mysqli_fetch_array($q12) )
-            {
-            $name=$row['name'];
-            $username=$row['username'];
-
-              $result=mysqli_query($Connect,"SELECT * FROM create_quiz_details WHERE eid='$eid' " )or die('Error231');
-              while($row=mysqli_fetch_array($result) )
-              {
-                $qtitle=$row['qtitle'];
-              }
-            
-            }
-            ?>
-			
-					<td><?php echo $c; ?></td>
-          <td><?php echo $name?></td>
-          <td><?php echo $e ?></td>
-          <td><?php echo $qtitle  ?></td>
-          <td><?php echo $s ?></td>
-          <td>             </td>
-          <td> 
-             &nbsp;&nbsp;
-          </td>
-				</tr>
-				<?php
-				$c++;
-				}
-				?>
-				</tbody>
-			</table>
-			
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<?php }  ?>
-
 
 </body>
 </html>
