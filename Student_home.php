@@ -16,6 +16,17 @@ include('./Connect.php');
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    <script>
+$(document).ready(function(){
+    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = localStorage.getItem('activeTab');
+    if(activeTab){
+        $('#nav-tab a[href="' + activeTab + '"]').tab('show');
+    }
+});
+</script>
 </head>
 
 <body>
@@ -247,6 +258,7 @@ include('./Connect.php');
 
 					<td><?php echo $i; ?></td>
 					<td>
+          
           <?php echo $row["qtitle"]; ?>
           <!-- <br> -->
           <!-- <b>Description : </b><?php echo $row['qdescription'] ?> -->
@@ -287,25 +299,25 @@ include('./Connect.php');
         </div>
       </div>
   
-  <!-----------------------------------rank POP UP -------------------------------------------------->
+  <!----------------------------------Rank POP UP -------------------------------------------------->
   <?php 
 
  $result = mysqli_query($Connect,"SELECT * FROM `create_quiz_details`");
  $array = array();
 while($row = mysqli_fetch_array($result)){
-  array_push($array,$row['eid']);
+  array_push($array,$row);
 }
 // Set the increment variable
-foreach( $array as $eid ):  
+foreach( $array as $row ):  
 
 ?>
 
 <!-- Modal -->
-<div class="modal fade" id="viewrank<?php echo $eid?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="viewrank<?php echo $row['eid']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h3 style="text-align: center" class="col-12 modal-title text-center" id="exampleModalLabel" ><b>Ranking (<?php echo $row['qtitle'] ?>)</b></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -314,13 +326,13 @@ foreach( $array as $eid ):
       <div class="container">
 	<p id="success"></p>
         <div class="table-wrapper">
-						              <h2 class="card-title" style="text-align:center"> <b> <div class="card-head"> Ranking</div></b></h2>
+						              <!-- <h2 class="card-title" style="text-align:center"> <b> <div class="card-head"> Ranking</div></b></h2> -->
             </div>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
 						
-						<th>SL NO</th>
+						            <th>Rank</th>
                         <th>Name</th>
                         <th>Email Id</th>
                         <th>Quiz Title</th>
@@ -333,7 +345,7 @@ foreach( $array as $eid ):
         
 				
        <?php 
-       
+       $eid = $row['eid'];
        $q=mysqli_query($Connect,"SELECT * FROM ranking  WHERE `eid` = '$eid'  ORDER BY score DESC  " )or die('Error223');
        $c=1;
             while($row=mysqli_fetch_array($q) )
@@ -377,7 +389,7 @@ foreach( $array as $eid ):
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
@@ -390,9 +402,9 @@ endforeach; //End the loop ?>
 
 
 <!-- Ranking Old vala  -->
-
+<?php /*
   <?php 
-    /*
+    
     $q=mysqli_query($Connect,"SELECT * FROM ranking  ORDER BY score DESC " )or die('Error223');
   ?>
     
@@ -458,11 +470,10 @@ endforeach; //End the loop ?>
 			</table>
 			
         </div>
-
-
+*/ ?>
 
   </div>
-*/ ?>
+
 
 
   <!--------------------Edit profile--------------->
@@ -470,6 +481,7 @@ endforeach; //End the loop ?>
 
 
   <div class="tab-pane fade" id="nav-edit" role="tabpanel" aria-labelledby="nav-edit-tab">
+  <br>
   <div class="row row-cols-1 row-cols-md-2">
   <div class="col mb-4">
     <div class="card">
