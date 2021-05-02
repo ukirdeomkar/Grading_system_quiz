@@ -274,6 +274,7 @@ $(document).ready(function(){
         
                 $q12=mysqli_query($Connect,"SELECT score FROM history WHERE eid='$eid' AND email='$email'" )or die('Error98');
                 $rowcount=mysqli_num_rows($q12);	
+              
                 ?>
                  <td>               
                 </td>   
