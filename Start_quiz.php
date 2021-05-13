@@ -58,19 +58,7 @@ img {
      element.remove();
 	}
 	</script>
-	<?php 
-		function upddateTime()
-		{
-			session_start();
-			include('./Connect.php');
-			$username= $_SESSION['username'];
-			$eid=$_GET['eid'];
-			$timeLeft = 100;
-
-			//$timeLeft = "<script>document.write(timeout)</script>";;
-			mysqli_query($Connect,"UPDATE `time` SET `timeleft`='$timeLeft' WHERE `username` = $username && `eid`=$eid");				
-			
- 	?>
+	
       
 </head>
 
