@@ -11,12 +11,23 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    <script>
+$(document).ready(function(){
+    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = localStorage.getItem('activeTab');
+    if(activeTab){
+        $('#nav-tab a[href="' + activeTab + '"]').tab('show');
+    }
+});
+</script>
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-dark ">
       <!--  <img src="https://cdn11.bigcommerce.com/s-fkkokiv406/images/stencil/800x600/uploaded_images/quizzo.jpg?t=1525706940" style="margin-left:10px" width="200" height="80" class="d-inline-block align-top" alt="">
--->     <h1> <a href="Index.php" style="margin-left:30px ">QUIZZO</a></h1>
+-->     <h1 > <a href="Index.php" style="margin-left:30px" >QUIZZO</a></h1>
         <div class="d-flex justify-content-end">
          <!--   <a href="JumpHome.php" class="btn btn-outline-light" style="margin-right:40px ">HOME</a>
 -->    <a href="Admin_login.php" class="btn btn-outline-danger">LOG OUT</a>
@@ -53,6 +64,14 @@ session_start();
 
 
     <!--------------------My quiz ------------->
+    <script>
+        function confirmationDelete(anchor)
+          {
+            var conf = confirm('Are you sure want to delete this record?');
+            if(conf)
+                window.location=anchor.attr("href");
+          }
+    </script>
 
     <div class="tab-pane fade" id="nav-quiz" role="tabpanel" aria-labelledby="nav-quiz-tab">
   
@@ -98,7 +117,7 @@ session_start();
           <td> &nbsp;
           <?php echo ' <a href="Start_quiz.php?q=create_quiz_details&user=admin&step=2&qtitle='.$row['qtitle'].'&eid='.$row['eid'].'&n=1&t='.$row["qno"].'" class="btn btn-warning" >Start</a> &nbsp;&nbsp; 
         '; ?>
-          <a href="Delete_quiz.php?q=del&eid=<?php echo $row['eid']; ?>" class="btn btn-danger"  >Delete</a>
+          <a onclick='javascript:confirmationDelete($(this));return false;' href="Delete_quiz.php?q=del&eid=<?php echo $row['eid']; ?>" class="btn btn-danger"  >Delete</a>
           
                     </td>
 				</tr>

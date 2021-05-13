@@ -61,9 +61,11 @@ img {
 			include('./Connect.php');
 			$username= $_SESSION['username'];
 			$eid=$_GET['eid'];
-			//$timeLeft = "<script>document.write(timeout)</script>";
-			echo $timeLeft;
-			mysqli_query($Connect,"UPDATE `time` SET `timeleft`='$timeLeft' WHERE `username` = $username && `eid`=$eid");	
+			$timeLeft = 100;
+
+			//$timeLeft = "<script>document.write(timeout)</script>";;
+			mysqli_query($Connect,"UPDATE `time` SET `timeleft`='$timeLeft' WHERE `username` = $username && `eid`=$eid");				
+			var tm= setTimeout(function(){upddateTime()},1000);
 		}
  	?>
       

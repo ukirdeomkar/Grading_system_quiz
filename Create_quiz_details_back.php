@@ -25,18 +25,18 @@ session_start();
        echo("<script>alert('Quiz is Already Created!')</script>");
        echo("<script>window.location = 'create_quiz_details.php'</script>");
      }
-     else
+     else 
      {
   
-       $query1 = "INSERT INTO `create_quiz_details`(`eid`,`admin_id`,`qtitle`,  `author`, `qno`, `qright`, `qwrong`, `qtime`, `qdescription`) VALUES ('$eid','$admin_id','$qtitle',$author,'$qno','$qright','$qwrong','$qtime','$qdescription')";
-       $res1 = mysqli_query($Connect,$query1);
-    
-       echo("<script>alert('Quiz Details Saved Succesfully ')</script>");
-       echo("<script>window.location = 'Create_quiz_que.php?admin_id=$admin_id&eid=$eid&n=$qno'</script>");
-       session_start();
-       $_SESSION['qtitle']=$data['qtitle'];
-       $_SESSION['qno'] = $_POST['qno'];
-     }
+      $query1 = "INSERT INTO `create_quiz_details`(`eid`,`admin_id`,`qtitle`,  `author`, `qno`, `qright`, `qwrong`, `qtime`, `qdescription`) VALUES ('$eid','$admin_id','$qtitle','$author','$qno','$qright','$qwrong','$qtime','$qdescription')";
+      $res1 = mysqli_query($Connect,$query1);
+   
+      echo("<script>alert('Quiz Details Saved Succesfully ')</script>");
+      echo("<script>window.location = 'Create_quiz_que.php?admin_id=$admin_id&eid=$eid&n=$qno'</script>");
+      session_start();
+      $_SESSION['qtitle']=$data['qtitle'];
+      $_SESSION['qno'] = $_POST['qno'];
+    }
 
   }
   else

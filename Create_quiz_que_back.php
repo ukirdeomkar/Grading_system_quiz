@@ -22,13 +22,7 @@ include('./Connect.php');
         $folder = "qimage/".$image;
           
         // mysqli_query($Connect, "INSERT INTO questions VALUES ('$image')");
-        if (move_uploaded_file($tempname, $folder))  {
-            $msg = "Image uploaded successfully";
-            echo 'Image uploaded successfully';
-        }
-        else{
-            $msg = "Failed to upload image";
-        }
+    
     
     $result = mysqli_query($Connect, "SELECT * FROM questions");
 
