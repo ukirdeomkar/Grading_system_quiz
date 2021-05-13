@@ -65,8 +65,7 @@ img {
 
 			//$timeLeft = "<script>document.write(timeout)</script>";;
 			mysqli_query($Connect,"UPDATE `time` SET `timeleft`='$timeLeft' WHERE `username` = $username && `eid`=$eid");				
-			var tm= setTimeout(function(){upddateTime()},1000);
-		}
+			
  	?>
       
 </head>
