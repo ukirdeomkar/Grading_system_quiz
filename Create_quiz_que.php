@@ -78,7 +78,7 @@ session_start();
                     <form method="POST" enctype="multipart/form-data" action="Create_quiz_que_back.php?n='.@$_GET['n'].'&eid='.@$_GET['eid'].'&ch=4 ">
                         <textarea class="form-control" placeholder="Enter the Question" name="qns'.$i.'" rows="4" cols="50"></textarea>
                         <br>';?>
-                        Add an Math Eq
+                        <b>To Add Maths Eq  </b>
                         <a   text-align: center
                           href="https://www.codecogs.com/latex/eqneditor.php" 
                           target="popup" 
@@ -89,7 +89,7 @@ session_start();
                        <input type="file" id="InputFile"  onchange="selectFile();"name = "qimage'.$i.'" hidden="hidden" />
                        <button type="button" id="buttonStyle" onclick="FileUpload();">Add Image</button>
                        <span id="errormsg">No file chosen</span><br><br>                       
-                        <br>';
+                        ';
                         
                         echo '
                         <input type="text" class="form-control" placeholder="Option 1" name="'.$i.'1" required>

@@ -20,13 +20,9 @@ include('./Connect.php');
     $image = $_FILES[$a]["name"];
     $tempname = $_FILES[$a]["tmp_name"]; 
     $folder = "qimage/".$image;
-    move_uploaded_file($_FILES[$a]["tmp_name"],$folder);
-        // mysqli_query($Connect, "INSERT INTO questions VALUES ('$image')");
-    
+    move_uploaded_file($_FILES[$a]["tmp_name"],$folder);    
     
     $result = mysqli_query($Connect, "SELECT * FROM questions");
-
-
 
     $q3=mysqli_query($Connect,"INSERT INTO `questions`(`eid`, `qid`, `questions`, `qimage`, `ch`, `sn`) VALUES  ('$eid','$qid','$qns' ,'$image', '$ch' , '$i')");
     $oaid=uniqid();
