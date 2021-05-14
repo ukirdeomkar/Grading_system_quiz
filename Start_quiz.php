@@ -90,7 +90,7 @@ img {
 <!--  <-------------------timer------------------------------------->
 
 
-<?php
+<!-- <?php
 if($_GET['user']=='user') 
 {
 $username= $_SESSION['username'];
@@ -109,7 +109,7 @@ echo '<h2>
   </script>
   
   <div id="time" style="float:center">timeout</div></h2> ';
-?>
+?> -->
         <!----------------------quiz start-------------------------->
 <?php
 
@@ -128,7 +128,7 @@ while($row=mysqli_fetch_array($q) )
 $qns=$row['questions'];
 $qid=$row['qid']; 
 $img=$row['qimage'];  
-echo '<b text-align: left;>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';?>
+echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';?>
 
 <div class="alb">
 <img src="qimage/'.$img.'" onerror="removeElement(this);" >
@@ -144,7 +144,7 @@ while($row=mysqli_fetch_array($q) )
 {
 $option=$row['option'];
 $optionid=$row['optionid'];
-echo'<input text-align: left; type="radio" name="ans" value="'.$optionid.'"><ptext-align: left;>'.$option.'</p><br /><br />';
+echo'<input type="radio" name="ans" value="'.$optionid.'"><p>'.$option.'</p><br /><br />';
 }
 echo'<br /><button name="submit" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
 // header("location:Start_quiz_back.php?q=reate_quiz_details&step=2&eid=$eid&n=$total");
@@ -161,6 +161,7 @@ echo'<br /><button name="submit" type="submit" class="btn btn-primary"><span cla
 //     echo '<a type="submit" id="endtest" href="Student_home.php" class="btn btn-danger btn-block ">End Test</button>';
 // }
 ?>
+
 <form method="post" id="endtest" name="endtest" action="Start_quiz_back.php?user='.$user.'&eid='.$eid.'&n='.$sn.'&t='.$qno.'&qid='.$qid.'">
 <!-- <button type="submit" id="endtest" class="btn btn-danger btn-block ">End Test</button> -->
 </form>

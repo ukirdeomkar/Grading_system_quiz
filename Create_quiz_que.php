@@ -33,7 +33,12 @@ session_start();
         <div class="row">
 
         <div class="col-3">
-            
+        <a   text-align: center
+              href="https://www.hostmath.com/" 
+              target="popup" 
+              onclick="window.open('https://www.hostmath.com/','popup','width=900,height=600'); return false;">
+                Open Math Editor
+          </a>
         </div>
 
         <div class="col-6">
@@ -95,6 +100,7 @@ session_start();
             </div>
             
         <div class="col-3">
+
         </div>
 
 
