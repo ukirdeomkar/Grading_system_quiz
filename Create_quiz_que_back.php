@@ -11,7 +11,7 @@ include('./Connect.php');
     for($i=1;$i<=$n;$i++)
      {
      $qid=uniqid();
-     $qns=$_POST['qns'.$i];
+     $qns=addcslashes($_POST['qns'.$i],"\\");
      
   
         // If upload button is clicked ...
@@ -33,10 +33,10 @@ include('./Connect.php');
     $obid=uniqid();
     $ocid=uniqid();
     $odid=uniqid();
-    $a=$_POST[$i.'1'];
-    $b=$_POST[$i.'2'];
-    $c=$_POST[$i.'3'];
-    $d=$_POST[$i.'4'];
+    $a=addcslashes($_POST[$i.'1'],"\\");
+    $b=addcslashes($_POST[$i.'2'],"\\");
+    $c=addcslashes($_POST[$i.'3'],"\\");
+    $d=addcslashes($_POST[$i.'4'],"\\");
     $e=$_POST[$i.'ans'];
     
     $qa=mysqli_query($Connect,"INSERT INTO options VALUES  ('$qid','$a','$oaid')") or die('Error61');

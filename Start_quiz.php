@@ -18,12 +18,19 @@ img {
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-    
-    <script type="text/javascript">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script src="jquery.jslatex.js"></script>
+	<!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.0.0/es5/latest?tex-mml-chtml.js">
+	</script> -->
+	<script type="text/javascript" src="https://www.hostmath.com/Math/MathJax.js?config=OK">
+	MathJax.Hub.Config({
+    jax: ["input/TeX","output/HTML-CSS"],
+    displayAlign: "left"
+	});
+	</script>
+
+	<script type="text/javascript">
 	function timeout()
 	{
 		var hours=Math.floor(timeLeft/3600);
@@ -57,13 +64,10 @@ img {
 	function removeElement(element) {
      element.remove();
 	}
-	</script>
-	
-      
+    </script>
 </head>
 
 <body  onload="timeout()">
-
     <nav class="navbar navbar-dark bg-dark ">
       <!--  <img src="https://cdn11.bigcommerce.com/s-fkkokiv406/images/stencil/800x600/uploaded_images/quizzo.jpg?t=1525706940" style="margin-left:10px" width="200" height="80" class="d-inline-block align-top" alt="">
 -->     <h1> <a href="Index.php" style="margin-left:30px ">QUIZZO</a></h1>
@@ -83,18 +87,20 @@ img {
 </nav>
 
 
+<!--  <-------------------timer------------------------------------->
 
 
 <?php
-
-// <-------------------timer------------------------------------->
-
+if($_GET['user']=='user') 
+{
 $username= $_SESSION['username'];
+}
 $eid=@$_GET['eid'];
 $res1 = mysqli_query($Connect, "SELECT `qtime` FROM create_quiz_details WHERE eid='$eid'"); 
 $data =   mysqli_fetch_array($res1);
 $qtime =  $data['qtime'] * 60;
-mysqli_query($Connect,"INSERT INTO `time`(`username`, `eid`, `timeleft`) VALUES ('$username','$eid','$qtime')");
+// mysqli_query($Connect,"INSERT INTO `time`(`username`, `eid`, `timeleft`) VALUES ('$username','$eid','$qtime')");
+
 echo '<h2>
 
   <script typ e="text/javascript">
@@ -122,12 +128,12 @@ while($row=mysqli_fetch_array($q) )
 $qns=$row['questions'];
 $qid=$row['qid']; 
 $img=$row['qimage'];  
-echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />
+echo '<b text-align: left;>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';?>
 
 <div class="alb">
 <img src="qimage/'.$img.'" onerror="removeElement(this);" >
 </div>
-';
+<?php
 
 }
 $q=mysqli_query($Connect,"SELECT * FROM options WHERE qid='$qid' " );
@@ -138,7 +144,7 @@ while($row=mysqli_fetch_array($q) )
 {
 $option=$row['option'];
 $optionid=$row['optionid'];
-echo'<input type="radio" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
+echo'<input text-align: left; type="radio" name="ans" value="'.$optionid.'"><ptext-align: left;>'.$option.'</p><br /><br />';
 }
 echo'<br /><button name="submit" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
 // header("location:Start_quiz_back.php?q=reate_quiz_details&step=2&eid=$eid&n=$total");
