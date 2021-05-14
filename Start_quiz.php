@@ -128,10 +128,11 @@ while($row=mysqli_fetch_array($q) )
 $qns=$row['questions'];
 $qid=$row['qid']; 
 $img=$row['qimage'];  
+
 echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';?>
 
 <div class="alb">
-<img src="qimage/'.$img.'" onerror="removeElement(this);" >
+<img src="qimage/<?php echo $img ?>" onerror="removeElement(this)>
 </div>
 <?php
 
@@ -144,9 +145,9 @@ while($row=mysqli_fetch_array($q) )
 {
 $option=$row['option'];
 $optionid=$row['optionid'];
-echo'<input type="radio" name="ans" value="'.$optionid.'"><p>'.$option.'</p><br /><br />';
+echo'<input type="radio" name="ans" value="'.$optionid.'">&nbsp;&nbsp;'.$option.'<br><br>';
 }
-echo'<br /><button name="submit" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
+echo'<br><button name="submit" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
 // header("location:Start_quiz_back.php?q=reate_quiz_details&step=2&eid=$eid&n=$total");
 }
 

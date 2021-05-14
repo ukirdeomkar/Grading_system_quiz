@@ -17,6 +17,23 @@ session_start();
   <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
+  <script>
+  function FileUpload()
+  {
+    document.getElementById('InputFile').click();	
+  }
+
+  function selectFile()
+  {
+    if (document.getElementById('InputFile').value) {
+      document.getElementById('errormsg').innerHTML = document.getElementById('InputFile').value.match(
+            /[\/\\]([\w\d\s\.\-\(\)]+)$/
+          )[1];
+        } else {
+          document.getElementById('errormsg').innerHTML = "No file chosen, yet.";
+        }
+  }
+  </script>
     
      </head>
 </head>
@@ -33,12 +50,7 @@ session_start();
         <div class="row">
 
         <div class="col-3">
-        <a   text-align: center
-              href="https://www.hostmath.com/" 
-              target="popup" 
-              onclick="window.open('https://www.hostmath.com/','popup','width=900,height=600'); return false;">
-                Open Math Editor
-          </a>
+      
         </div>
 
         <div class="col-6">
@@ -65,11 +77,18 @@ session_start();
 
                     <form method="POST" enctype="multipart/form-data" action="Create_quiz_que_back.php?n='.@$_GET['n'].'&eid='.@$_GET['eid'].'&ch=4 ">
                         <textarea class="form-control" placeholder="Enter the Question" name="qns'.$i.'" rows="4" cols="50"></textarea>
-                        <br>
-                        <label> Add an Image File </label>
-                        <br> 
-                        <input type="file" name="qimage'.$i.'" />
-                        <br>
+                        <br>';?>
+                        Add an Math Eq
+                        <a   text-align: center
+                          href="https://www.codecogs.com/latex/eqneditor.php" 
+                          target="popup" 
+                          onclick="window.open('https://www.codecogs.com/latex/eqneditor.php','popup','width=600,height=600'); return false;">
+                            Open Math Editor
+                      </a>
+                        <br><?php echo'
+                       <input type="file" id="InputFile"  onchange="selectFile();"name = "qimage'.$i.'" hidden="hidden" />
+                       <button type="button" id="buttonStyle" onclick="FileUpload();">Add Image</button>
+                       <span id="errormsg">No file chosen</span><br><br>                       
                         <br>';
                         
                         echo '
@@ -108,3 +127,7 @@ session_start();
 
 </body>
 </html>
+<!-- <label for="file-input"> Add Image </label>
+                        <br> 
+                        <input type="file" name="qimage'.$i.'" />
+                        <br> -->

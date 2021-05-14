@@ -18,9 +18,9 @@ include('./Connect.php');
        
     $a = 'qimage'.$i.'';
     $image = $_FILES[$a]["name"];
-    $tempname = $_FILES[$a]["tmp_name"];    
-        $folder = "qimage/".$image;
-          
+    $tempname = $_FILES[$a]["tmp_name"]; 
+    $folder = "qimage/".$image;
+    move_uploaded_file($_FILES[$a]["tmp_name"],$folder);
         // mysqli_query($Connect, "INSERT INTO questions VALUES ('$image')");
     
     
