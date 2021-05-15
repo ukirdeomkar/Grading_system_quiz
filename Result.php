@@ -21,9 +21,9 @@
     </nav>
 <?php
  include('./Connect.php');
- session_start();
+ session_start(); 
  $emailid=$_SESSION['emailid'];
- 
+
 //result display
 
 if(@$_GET['q']== 'result' && @$_GET['eid']) 

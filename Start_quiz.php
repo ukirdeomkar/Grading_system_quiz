@@ -9,8 +9,8 @@ include('./Connect.php');
 
 <style>
 img {
-  width: 100%;
-  height: auto;
+  width: 60%;
+  height:auto;
 }
 </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -25,7 +25,7 @@ img {
     displayAlign: "left"
 	});
 	</script>
-    
+<!--     
     <script type="text/javascript">
 	function timeout()
 	{
@@ -56,16 +56,35 @@ img {
 			msg="0"+msg;
 		}
 		return msg;
-	}
+	} -->
+	<script>
 	function removeElement(element) {
      element.remove();
 	}
-	</script>
-	
+	</script> 
+	<?php
+//including the database connection file
+	include("Connect.php");
+	if($_GET['user']=='student')
+	{ 
+		$username= $_SESSION['username'];
+		
+	$eid=@$_GET['eid'];
+	$result = mysqli_query($Connect, "SELECT * FROM time WHERE `username`='$username' AND `eid` = '$eid'");
+	while($res = mysqli_fetch_array($result)) { 
+	$date = $res['date'];
+	$h = $res['hour'];
+	$m = $res['min'];
+	$s = $res['sec'];
+	$timeleft = $res['timeleft'];
+	}
+	}
+	?>
       
 </head>
 
-<body  onload="timeout()">
+<body>
+
 
     <nav class="navbar navbar-dark bg-dark ">
       <!--  <img src="https://cdn11.bigcommerce.com/s-fkkokiv406/images/stencil/800x600/uploaded_images/quizzo.jpg?t=1525706940" style="margin-left:10px" width="200" height="80" class="d-inline-block align-top" alt="">
@@ -92,25 +111,60 @@ img {
 
 // <-------------------timer------------------------------------->
 
-$username= $_SESSION['username'];
-$eid=@$_GET['eid'];
-$res1 = mysqli_query($Connect, "SELECT `qtime` FROM create_quiz_details WHERE eid='$eid'"); 
-$data =   mysqli_fetch_array($res1);
-$qtime =  $data['qtime'] * 60;
-mysqli_query($Connect,"INSERT INTO `time`(`username`, `eid`, `timeleft`) VALUES ('$username','$eid','$qtime')");
-echo '<h2>
+// $username= $_SESSION['username'];
+// $eid=@$_GET['eid'];
+// $res1 = mysqli_query($Connect, "SELECT `qtime` FROM create_quiz_details WHERE eid='$eid'"); 
+// $data =   mysqli_fetch_array($res1);
+// $qtime =  $data['qtime'] * 60;
+// mysqli_query($Connect,"INSERT INTO `time`(`username`, `eid`, `timeleft`) VALUES ('$username','$eid','$qtime')");
+// echo '<h2>
 
-  <script typ e="text/javascript">
-  var timeLeft= '.$qtime.';
+//   <script typ e="text/javascript">
+//   var timeLeft= '.$qtime.';
   
-  </script>
+//   </script>
   
-  <div id="time" style="float:center">timeout</div></h2> ';
+//   <div id="time" style="float:center">timeout</div></h2> ';
 ?>
+
+<div id="demo" align="right"></div></h2>
+
+<script>
+if(<?php echo $_GET['user']=='student'  ?>)
+{
+
+ var countDownDate = <?php  echo $timeleft; ?> * 1000;
+var now = <?php echo time() ?> * 1000;
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+now = now + 1000;
+// Find the distance between now an the count down date
+var distance = countDownDate - now;
+// Time calculations for days, hours, minutes and seconds
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+// Output the result in an element with id="demo"
+document.getElementById("demo").innerHTML = hours + "hrs " +
+minutes + "m " + seconds + "s ";
+// If the count down is over, write some text 
+if (distance < 0) {
+clearInterval(x);
+ document.getElementById("demo").innerHTML = "EXPIRED";
+ document.getElementById("endtest").submit();
+}
+    
+}, 1000);
+}
+    </script>
+
+
+
         <!----------------------quiz start-------------------------->
 <?php
 
-if(@$_GET['q']== 'create_quiz_details' && @$_GET['step']== 2) 
+if(@$_GET['q']== 'start_quiz' && @$_GET['step']== 2) 
 {
 include('./Connect.php');
 $user=$_GET['user'];
@@ -125,13 +179,13 @@ while($row=mysqli_fetch_array($q) )
 $qns=$row['questions'];
 $qid=$row['qid']; 
 $img=$row['qimage'];  
-echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />
-
+echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
+?>
 <div class="alb">
-<img src="qimage/'.$img.'" onerror="removeElement(this);" >
+<img src="qimage/<?php echo $img ?> " onerror="removeElement(this);" >
 </div>
-';
 
+<?php 
 }
 $q=mysqli_query($Connect,"SELECT * FROM options WHERE qid='$qid' " );
 echo '<form action="Start_quiz_back.php?user='.$user.'&eid='.$eid.'&n='.$sn.'&t='.$qno.'&qid='.$qid.'" method="POST"  class="form-horizontal">
@@ -143,7 +197,7 @@ $option=$row['option'];
 $optionid=$row['optionid'];
 echo'<input type="radio" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
 }
-echo'<br /><button name="submit" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
+echo'<br /><button  name="submit" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
 // header("location:Start_quiz_back.php?q=reate_quiz_details&step=2&eid=$eid&n=$total");
 }
 
@@ -157,9 +211,14 @@ echo'<br /><button name="submit" type="submit" class="btn btn-primary"><span cla
 // {
 //     echo '<a type="submit" id="endtest" href="Student_home.php" class="btn btn-danger btn-block ">End Test</button>';
 // }
+
+$user=$_GET['user'];
+$eid=@$_GET['eid'];
+$sn=@$_GET['n'];
+$qno=$_GET['t'];
+echo '<form method="post" id="endtest" name="endtest" action="Start_quiz_back.php?user='.$user.'&status=expired&eid='.$eid.'&n='.$sn.'&t='.$qno.'">
+<button type="submit" id="endtest" class="btn btn-danger btn-block ">End Test</button>
+</form>';
 ?>
-<form method="post" id="endtest" name="endtest" action="Start_quiz_back.php?user='.$user.'&eid='.$eid.'&n='.$sn.'&t='.$qno.'&qid='.$qid.'">
-<!-- <button type="submit" id="endtest" class="btn btn-danger btn-block ">End Test</button> -->
-</form>
 </body>
 </html>

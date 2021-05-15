@@ -1,17 +1,20 @@
 <?php
  include('./Connect.php');
  session_start();
+ $status = $_GET['status'];
+ echo $status;
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit']) or $status='expired')
 {
-$user=$_GET['user'];
-$eid=@$_GET['eid'];
-$sn=@$_GET['n'];    
-$qno=@$_GET['t'];
-$ans=$_POST['ans'];
-$qid=@$_GET['qid'];
-$emailid=$_SESSION['emailid'];
-$username = $_SESSION['username'];
+    $user=$_GET['user'];
+    $eid=@$_GET['eid'];
+    $sn=@$_GET['n'];    
+    $qno=@$_GET['t'];
+    $ans=$_POST['ans'];
+    echo $ans;
+    $qid=@$_GET['qid'];
+    $emailid=$_SESSION['emailid'];
+    $username = $_SESSION['username'];
 
 $res1 = mysqli_query($Connect," SELECT * FROM `user` WHERE `username` = '$username' ");
 while($row=mysqli_fetch_array($res1) )
@@ -75,16 +78,17 @@ $s=$s-$qwrong;
 $q=mysqli_query($Connect,"UPDATE `history` SET `score`=$s,`level`=$sn,`qwrong`=$w, date=NOW() WHERE  email = '$emailid' AND eid = '$eid'")or die('Error147');
 }
 
-if($sn!= $qno  ) 
+if($sn!= $qno  AND $status!='expired') 
 {   
+    echo("<script>alert('Questions Saved Succesfully ')</script>");
+
 $sn++;
-echo $sn;
-header("location:Start_quiz.php?q=create_quiz_details&user=$user&step=2&eid=$eid&n=$sn&t=$qno")or die('Error152');
+header("location:Start_quiz.php?q=start_quiz&user=$user&step=2&eid=$eid&n=$sn&t=$qno")or die('Error152');
 }
 
 
 //Edit line 87 else if statement to not include admin in the ranking system
-else if( $_GET['user']=='student'  )
+else if( $_GET['user']=='student' AND $status=='expired' )
 {    
 
 $q=mysqli_query($Connect,"SELECT score FROM history WHERE eid='$eid' AND email='$emailid'" )or die('Error156');

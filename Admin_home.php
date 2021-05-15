@@ -25,6 +25,7 @@ $(document).ready(function(){
 </head>
 
 <body>
+
     <nav class="navbar navbar-dark bg-dark ">
       <!--  <img src="https://cdn11.bigcommerce.com/s-fkkokiv406/images/stencil/800x600/uploaded_images/quizzo.jpg?t=1525706940" style="margin-left:10px" width="200" height="80" class="d-inline-block align-top" alt="">
 -->     <h1 > <a href="Index.php" style="margin-left:30px" >QUIZZO</a></h1>
@@ -48,7 +49,7 @@ $(document).ready(function(){
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div id="nav-home-tab">
       <div class="jumbotron">
-        <h4 class="display-4">Welcome, <?php echo($_SESSION['admin_id']); ?></h4>
+        <h4 class="display-4">Welcome, <?php echo($_SESSION['aname']); ?></h4>
         <h4 class="lead">Username-<?php echo($_SESSION['ausername']); ?></h4>
         <p class="lead">Contact-<?php echo($_SESSION['aphonenumber']); ?></p>
         <hr class="my-4">
@@ -115,7 +116,7 @@ $(document).ready(function(){
 					<td><?php echo $row['qtitle']; ?></td>
           <td>             </td>
           <td> &nbsp;
-          <?php echo ' <a href="Start_quiz.php?q=create_quiz_details&user=admin&step=2&qtitle='.$row['qtitle'].'&eid='.$row['eid'].'&n=1&t='.$row["qno"].'" class="btn btn-warning" >Start</a> &nbsp;&nbsp; 
+          <?php echo ' <a href="Start_quiz.php?q=start_quiz&user=admin&step=2&qtitle='.$row['qtitle'].'&eid='.$row['eid'].'&n=1&t='.$row["qno"].'" class="btn btn-warning" >Start</a> &nbsp;&nbsp; 
         '; ?>
           <a onclick='javascript:confirmationDelete($(this));return false;' href="Delete_quiz.php?q=del&eid=<?php echo $row['eid']; ?>" class="btn btn-danger"  >Delete</a>
           

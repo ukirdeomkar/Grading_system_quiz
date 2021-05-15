@@ -85,11 +85,14 @@ session_start();
                           onclick="window.open('https://www.codecogs.com/latex/eqneditor.php','popup','width=600,height=600'); return false;">
                             Open Math Editor
                       </a>
-                        <br><?php echo'
-                       <input type="file" id="InputFile"  onchange="selectFile();"name = "qimage'.$i.'" hidden="hidden" />
-                       <button type="button" id="buttonStyle" onclick="FileUpload();">Add Image</button>
-                       <span id="errormsg">No file chosen</span><br><br>                       
-                        ';
+                  
+                       <?php echo '
+                        <br>  <br>
+                        <b><label for="file-input"> Add an Image : </label></b>
+                        
+                        <input type="file" name="qimage'.$i.'" />
+                        <br><br>';
+                        
                         
                         echo '
                         <input type="text" class="form-control" placeholder="Option 1" name="'.$i.'1" required>

@@ -126,7 +126,7 @@ $(document).ready(function(){
                 $rowcount=mysqli_num_rows($q12);	
                 if($rowcount == 0)
                 {
-                  echo ' <td> <a href="Start_quiz.php?q=create_quiz_details&user=student&step=2&eid='.$row['eid'].'&n=1&t='.$row["qno"].'" class="btn btn-warning" >Start</a> &nbsp;&nbsp; </td>
+                  echo ' <td> <a href="Time.php?q=start_quiz&user=student&step=2&qtitle='.$row['qtitle'].'&eid='.$row['eid'].'&n=1&t='.$row["qno"].'" class="btn btn-warning" >Start</a> &nbsp;&nbsp; </td>
                   ';
                 }
                 else
