@@ -20,6 +20,9 @@ $(document).ready(function(){
     if(activeTab){
         $('#nav-tab a[href="' + activeTab + '"]').tab('show');
     }
+    else{
+      $('#nav-tab ')
+    }
 });
 </script>
 </head>

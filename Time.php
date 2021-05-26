@@ -17,10 +17,10 @@ if($userType== 'student')
     $data =   mysqli_fetch_array($res1);
     $qtime =  $data['qtime'] * 60;
     $qtitle = $data['qtitle'];
-    $futureTime = time()+$qtime;
+    $futureTime = time()+15;
     mysqli_query($Connect,"INSERT INTO `time`(`username`, `eid`, `qtitle`, `date`, `hour`, `min`, `sec`, `timeleft`) VALUES ('$username','$eid','$qtitle',NOW(),'0','0','0','$futureTime')");
     
-    echo("<script>window.location = 'Start_quiz.php?q=start_quiz&user=$userType&step=2&qtitle=$qtitle&eid=$eid&n=1&t=$qno '</script>");
+    echo("<script>window.location = 'Start_quiz.php?q=start_quiz&user=$userType&status=resume&step=2&qtitle=$qtitle&eid=$eid&n=1&t=$qno '</script>");
 
 }
  ?>

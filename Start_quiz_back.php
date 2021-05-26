@@ -4,18 +4,22 @@
  $status = $_GET['status'];
  echo $status;
 
-if(isset($_POST['submit']) or $status='expired')
+if(isset($_POST['endtest']) or $status='expired')
 {
+    echo("<script>alert('ans = ')</script>");
     $user=$_GET['user'];
     $eid=@$_GET['eid'];
     $sn=@$_GET['n'];    
     $qno=@$_GET['t'];
-    $ans=$_POST['ans'];
+    $ans=@$_POST['ans'];
     echo $ans;
     $qid=@$_GET['qid'];
     $emailid=$_SESSION['emailid'];
     $username = $_SESSION['username'];
-
+    if($ans == NULL)
+    {
+        $ans = 'false';
+    }
 $res1 = mysqli_query($Connect," SELECT * FROM `user` WHERE `username` = '$username' ");
 while($row=mysqli_fetch_array($res1) )
 {
@@ -26,12 +30,13 @@ $q=mysqli_query($Connect,"SELECT * FROM answer WHERE qid='$qid' " );
 while($row=mysqli_fetch_array($q) )
 {
 $ansid=$row['ansid'];
+echo $ansid;
 }
 }
 
 if($ans == $ansid)
 { 
-   
+echo("<script>alert('ans = = ansid ')</script>");
 $q=mysqli_query($Connect,"SELECT * FROM create_quiz_details WHERE eid='$eid' " );
 while($row=mysqli_fetch_array($q) )
 {
@@ -40,7 +45,7 @@ $qright=$row['qright'];
 if($sn == 1)
 {
     
-$q=mysqli_query($Connect,"INSERT INTO history VALUES('$emailid','$eid' ,'0','0','0','0',NOW())")or die('Error');
+$q=mysqli_query($Connect,"INSERT INTO history VALUES('$emailid','$eid' ,'0','0','0','0','0',NOW())")or die('Error');
 }
 $q=mysqli_query($Connect,"SELECT * FROM history WHERE eid='$eid' AND email='$emailid' ")or die('Error115');
 
@@ -54,6 +59,25 @@ $s=$s+$qright;
 $q=mysqli_query($Connect,"UPDATE `history` SET `score`=$s,`level`=$sn,`qright`=$r, date= NOW()  WHERE  email = '$emailid' AND eid = '$eid'")or die('Error124');
 } 
 
+else if ($ans == 'false')
+{  
+
+if($sn == 1)
+{
+
+$q=mysqli_query($Connect,"INSERT INTO history VALUES('$emailid','$eid' ,'0','0','0','0','0',NOW() )")or die('Error137');
+}
+$q=mysqli_query($Connect,"SELECT * FROM history WHERE eid='$eid' AND email='$emailid' " )or die('Error139');
+while($row=mysqli_fetch_array($q) )
+{
+$qNA=$row['qNA'];
+$s=$row['score'];
+
+}
+$qNA++;
+$s=$s;
+$q=mysqli_query($Connect,"UPDATE `history` SET `score`=$s,`level`=$sn,`qNA`=$qNA, date=NOW() WHERE  email = '$emailid' AND eid = '$eid'")or die('Error147');
+}
 
 else
 {  
@@ -65,7 +89,7 @@ $qwrong=$row['qwrong'];
 if($sn == 1)
 {
 
-$q=mysqli_query($Connect,"INSERT INTO history VALUES('$emailid','$eid' ,'0','0','0','0',NOW() )")or die('Error137');
+$q=mysqli_query($Connect,"INSERT INTO history VALUES('$emailid','$eid' ,'0','0','0','0','0',NOW() )")or die('Error137');
 }
 $q=mysqli_query($Connect,"SELECT * FROM history WHERE eid='$eid' AND email='$emailid' " )or die('Error139');
 while($row=mysqli_fetch_array($q) )
@@ -77,18 +101,18 @@ $w++;
 $s=$s-$qwrong;
 $q=mysqli_query($Connect,"UPDATE `history` SET `score`=$s,`level`=$sn,`qwrong`=$w, date=NOW() WHERE  email = '$emailid' AND eid = '$eid'")or die('Error147');
 }
-
-if($sn!= $qno  AND $status!='expired') 
+// 
+if($sn!= $qno AND $status!='expired') 
 {   
     echo("<script>alert('Questions Saved Succesfully ')</script>");
 
 $sn++;
-header("location:Start_quiz.php?q=start_quiz&user=$user&step=2&eid=$eid&n=$sn&t=$qno")or die('Error152');
+header("location:Start_quiz.php?q=start_quiz&user=$user&status=resume&step=2&eid=$eid&n=$sn&t=$qno")or die('Error152');
 }
 
 
 //Edit line 87 else if statement to not include admin in the ranking system
-else if( $_GET['user']=='student' AND $status=='expired' )
+else if( $_GET['user']=='student')
 {    
 
 $q=mysqli_query($Connect,"SELECT score FROM history WHERE eid='$eid' AND email='$emailid'" )or die('Error156');
@@ -112,12 +136,11 @@ $sun=$row['score'];
 $sun=$s+$sun;
 $q=mysqli_query($Connect,"UPDATE `ranking` SET `score`=$sun ,time=NOW() WHERE email= '$emailid'")or die('Error174');
 }
-
 header("location:Result.php?q=result&user=$user&eid=$eid");
 }
 
 else
-{
+{   
 header("location:Result.php?q=result&user=$user&eid=$eid");
 }
 

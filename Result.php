@@ -39,12 +39,15 @@ $s=$row['score'];
 $w=$row['qwrong'];
 $r=$row['qright'];
 $qa=$row['level'];
+$qNA=$row['qNA'];
 
 }
-echo '<tr style="color:#66CCFF"><td>Total Questions</td><td>'.$qa.'</td></tr>
-<tr style="color:#99cc32"><td>right Answer&nbsp;<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></td><td>'.$r.'</td></tr> 
+echo '<tr style="color:#00b7eb"><td>Total Questions</td><td>'.$qa.'</td></tr>
+<tr style="color:#00ff00"><td>right Answer&nbsp;<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></td><td>'.$r.'</td></tr> 
 <tr style="color:red"><td>Wrong Answer&nbsp;<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></td><td>'.$w.'</td></tr>
-<tr style="color:#990000"><td>Total Score&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span></td><td>'.$s.'</td></tr>';
+<tr style="color:#708090"><td>Not Attempted&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span></td><td>'.$qNA.'</td></tr>
+<tr style="color:#990000"><td>Total Score&nbsp;<span class="glyphicon glyphicon-star" aria-hidden="true"></span></td><td>'.$s.'</td></tr>
+';
 
 // $q=mysqli_query($Connect,"SELECT * FROM ranking  WHERE  email='$emailid' " )or die('Error157');
 //  while($row=mysqli_fetch_array($q) )
