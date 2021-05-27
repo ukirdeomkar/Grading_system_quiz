@@ -22,7 +22,7 @@
 <?php
  include('./Connect.php');
  session_start(); 
- $emailid=$_SESSION['emailid'];
+ $emailid=@$_SESSION['emailid'];
 
 //result display
 

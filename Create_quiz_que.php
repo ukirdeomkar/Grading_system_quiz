@@ -88,6 +88,7 @@ session_start();
                   
                        <?php echo '
                         <br>  <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <b><label for="file-input"> Add an Image : </label></b>
                         
                         <input type="file" name="qimage'.$i.'" />

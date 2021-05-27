@@ -127,7 +127,8 @@ img {
 //   <div id="time" style="float:center">timeout</div></h2> ';
 ?>
 
-<div id="demo" align="right"></div></h2>
+<div id="demo" style="font-size:30px; text-align: -moz-center;
+"></div></h2>
 
 <script>
 if(<?php echo $_GET['user']=='student'  ?>)

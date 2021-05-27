@@ -17,7 +17,9 @@
         font-size: 30px;
 
         }
-
+        body {
+        overflow: hidden; /* Hide scrollbars */
+        }   
     </style>
 
 </head>

@@ -25,6 +25,9 @@ $(document).ready(function(){
     }
 });
 </script>
+
+
+
 </head>
 
 <body>
@@ -391,7 +394,7 @@ endforeach; //End the loop ?>
   <!--------------------Edit profile--------------->
 
 
-
+  <br>
   <div class="tab-pane fade" id="nav-edit" role="tabpanel" aria-labelledby="nav-edit-tab">
   <div class="row row-cols-1 row-cols-md-2">
   <div class="col mb-4">

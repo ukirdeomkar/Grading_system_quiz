@@ -24,7 +24,9 @@
        /* background: linear-gradient(to right, #f05053, #e1eec3); /*         /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     }
-
+    body {
+    overflow: hidden; /* Hide scrollbars */
+    }
     </style>
 
 </head>
@@ -35,7 +37,7 @@
        <!--<img src="https://cdn11.bigcommerce.com/s-fkkokiv406/images/stencil/800x600/uploaded_images/quizzo.jpg?t=1525706940" style="margin-left:10px" width="200" height="80"></img>
 --> <h1><a href="Index.php"  style="margin-left:30px; border:0px">QUIZZO</a></h1>
     <div class="d-flex justify-content-end">
-            <a href="Student_login.php" class="btn btn-outline-light" style="margin-right:40px; border:0px">STUDENT LOG IN</a>
+            <a href="Student_login.php" class="btn btn-outline-light" style="margin-right:40px; border:0px">STUDENT LOGIN</a>
             <a href="Admin_login.php" class="btn btn-outline-danger" style="margin-right:0px; border:0px">ADMIN LOGIN </a>
         </div>
 </nav>
